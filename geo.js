@@ -1,7 +1,8 @@
-import Boundary, {Events} from 'react-native-boundary';
-import React from 'react';
+import React, {Component} from 'react';
 
-class MyComponent extends React.Class {
+import Boundary, {Events} from 'react-native-boundary';
+
+class MyComponent extends Component {
   componentWillMount() {
     Boundary.add({
       lat: 34.017714,
