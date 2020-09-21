@@ -6,8 +6,8 @@ module.exports = async (taskData) => {
   console.log(taskData);
   debugger;
   // do stuff
-  RNSimpleNativeGeofencing.updateGeofences(
-    newGeofencesArray,
-    taskData.remainingTime
-  );
+  // RNSimpleNativeGeofencing.updateGeofences(
+  //   newGeofencesArray,
+  //   taskData.remainingTime
+  // );
 };
