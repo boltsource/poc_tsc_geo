@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, Alert} from 'react';
 import {Text, View, Platform, Button, StyleSheet, Image,TextInput} from 'react-native';
 // import Boundary, {Events} from 'react-native-boundary';
 import RNSimpleNativeGeofencing from 'react-native-simple-native-geofencing';
@@ -6,19 +6,25 @@ import Geolocation from '@react-native-community/geolocation';
 
 import {PermissionsAndroid} from 'react-native';
 
+const checkPermissionsResponse = (res) => Object.keys(res).reduce((acc, key) => {
+  if (!acc) {
+    return false;
+  }
+
+  return res[key] === PermissionsAndroid.RESULTS.GRANTED;
+}, true);
+
 async function requestLocationPermission() {
   try {
-    const granted = await PermissionsAndroid.request(
+    const res = await PermissionsAndroid.requestMultiple([
       PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
-      {
-        'title': 'Location permission',
-        'message': 'Needed obviously'
-      }
-    )
-    if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-      console.log('Granted Permission')
+      "android.permission.ACCESS_BACKGROUND_LOCATION"
+    ]);
+
+    if (!checkPermissionsResponse(res)) {
+      console.log('permission check failed', JSON.stringify(res, null, 2));
     } else {
-      console.log('Denied Permission')
+      console.log('permission check succeeded');
     }
   } catch (err) {
     console.warn(err)
@@ -76,7 +82,10 @@ export default class HelloWorldApp extends Component {
   componentWillMount() {
     //see above
     if (Platform.OS === 'android') {
+      console.log('CALLING PERMISSION CHECK!');
       requestLocationPermission();
+    } else {
+      console.log('NOT ON ANDROID');
     }
   }
   componentDidMount() {

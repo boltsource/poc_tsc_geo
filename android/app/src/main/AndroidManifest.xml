@@ -1,11 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
   package="com.ts_geo">
-
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
-
     <application
       android:name=".MainApplication"
       android:label="@string/app_name"
@@ -24,14 +22,9 @@
         </intent-filter>
       </activity>
       <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
-
-      
         <receiver android:name="com.simplegeofencing.reactnative.GeofenceTransitionsBroadcastReceiver" android:foregroundServiceType="location" />
         <service android:name="com.simplegeofencing.reactnative.ShowTimeoutNotification" />
         <service android:name="com.simplegeofencing.reactnative.MonitorUpdateService"/>
         <service android:name="com.simplegeofencing.reactnative.GeofenceTransitionsIntentService" />
-
-
     </application>
-
 </manifest>
